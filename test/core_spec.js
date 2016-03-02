@@ -39,7 +39,47 @@ describe('application logic', () => {
         entries: List.of('Memento')
       }));
     });
-  });
+
+    it('puts winner of current vote back to entries', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('The Dark Knight', 'Inception'),
+          tally: Map({
+            'The Dark Knight': 4,
+            'Inception': 2
+          })
+        }),
+        entries: List.of('Interstellar', 'Insomnia', 'Memento')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('Interstellar', 'Insomnia')
+        }),
+        entries: List.of('Memento', 'The Dark Knight')
+      }));
+    });
+
+    it('puts both from tied vote back to entries', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('The Dark Knight', 'Inception'),
+          tally: Map({
+            'The Dark Knight': 3,
+            'Inception': 3
+          })
+        }),
+        entries: List.of('Interstellar', 'Insomnia', 'Memento')
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        vote: Map({
+          pair: List.of('Interstellar', 'Insomnia')
+        }),
+        entries: List.of('Memento', 'The Dark Knight', 'Inception')
+      }));
+    });
+  }); // end next
 
   describe('vote', () => {
     it('creates a tally for the voted entry', () => {
