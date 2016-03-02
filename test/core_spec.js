@@ -79,6 +79,23 @@ describe('application logic', () => {
         entries: List.of('Memento', 'The Dark Knight', 'Inception')
       }));
     });
+
+    it('marks winner when just one entry left', () => {
+      const state = Map({
+        vote: Map({
+          pair: List.of('Inception', 'Interstellar'),
+          tally: Map({
+            'Inception': 4,
+            'Interstellar': 2
+          })
+        }),
+        entries: List()
+      });
+      const nextState = next(state);
+      expect(nextState).to.equal(Map({
+        winner: 'Inception'
+      }));
+    });
   }); // end next
 
   describe('vote', () => {
