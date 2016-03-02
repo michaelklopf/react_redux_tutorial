@@ -56,4 +56,20 @@ describe('reducer', () => {
       entries: ['Inception']
     }));
   });
+
+  it('can be used with reduce', () => {
+    const actions = [
+      {type: 'SET_ENTRIES', entries: ['Inception', 'Interstellar']},
+      {type: 'NEXT'},
+      {type: 'VOTE', entry: 'Inception'},
+      {type: 'VOTE', entry: 'Interstellar'},
+      {type: 'VOTE', entry: 'Inception'},
+      {type: 'NEXT'}
+    ];
+    const finalState = actions.reduce(reducer, Map());
+
+    expect(finalState).to.equal(fromJS({
+      winner: 'Inception'
+    }));
+  });
 });
