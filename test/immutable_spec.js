@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 // Learning test
 import {expect} from 'chai';
 import {List, Map} from 'immutable';
