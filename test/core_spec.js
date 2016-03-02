@@ -101,44 +101,32 @@ describe('application logic', () => {
   describe('vote', () => {
     it('creates a tally for the voted entry', () => {
       const state = Map({
-        vote: Map({
-          pair: List.of('The Dark Knight', 'Inception')
-        }),
-        entries: List()
+        pair: List.of('The Dark Knight', 'Inception')
       });
       const nextState = vote(state, 'Inception');
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('The Dark Knight', 'Inception'),
-          tally: Map({
-            'Inception': 1
-          })
-        }),
-        entries: List()
+        pair: List.of('The Dark Knight', 'Inception'),
+        tally: Map({
+          'Inception': 1
+        })
       }));
     });
 
     it('adds to existing tally for the voted entry', () => {
       const state = Map({
-        vote: Map({
-          pair: List.of('The Dark Knight', 'Inception'),
-          tally: Map({
-            'The Dark Knight': 3,
-            'Inception': 2
-          })
-        }),
-        entries: List()
+        pair: List.of('The Dark Knight', 'Inception'),
+        tally: Map({
+          'The Dark Knight': 3,
+          'Inception': 2
+        })
       });
       const nextState = vote(state, 'The Dark Knight');
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of('The Dark Knight', 'Inception'),
-          tally: Map({
-            'The Dark Knight': 4,
-            'Inception': 2
-          })
-        }),
-        entries: List()
+        pair: List.of('The Dark Knight', 'Inception'),
+        tally: Map({
+          'The Dark Knight': 4,
+          'Inception': 2
+        })
       }));
     }); // end it
   }); // end vote describe
