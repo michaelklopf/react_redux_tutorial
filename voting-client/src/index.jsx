@@ -6,6 +6,6 @@ import Voting from './components/Voting';
 const pair = ['Inception', 'The Prestige'];
 
 ReactDOM.render(
-  <Voting pair={pair} hasVoted="Inception" />,
+  <Voting pair={pair} winner="Inception" />,
   document.getElementById('app')
 );
