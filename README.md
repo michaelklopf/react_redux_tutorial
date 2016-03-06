@@ -22,6 +22,7 @@ All connected clients - including the one that initiated the original action - r
 Test & Development
 ===
 ## Front-End  
+Add global dependency `npm install -g webpack webpack-dev-server`.  
 Start development server with `webpack-dev-server`.  
 
 ## Front-End and Back-End
