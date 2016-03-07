@@ -7,6 +7,7 @@ import Vote from './Vote';
 export default React.createClass({
   mixins: [PureRenderMixin],
   render: function() {
+    console.log(...this.props);
     return <div>
       {
         this.props.winner ?
