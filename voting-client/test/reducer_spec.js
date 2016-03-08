@@ -12,18 +12,20 @@ describe('reducer', () => {
       state: Map({
         vote: Map({
           pair: List.of('Inception', 'Batman Begins'),
-          tally: Map({Inception: 1})
+          tally: Map({'Inception': 1})
         })
       })
     };
     const nextState = reducer(initialState, action);
-
-    expect(nextState).to.equal(fromJS({
+    const statevar = fromJS({
       vote: {
         pair: ['Inception', 'Batman Begins'],
-        tally: {Inception: 1}
+        tally: {'Inception': 1}
       }
-    }));
+    });
+    //console.log(nextState);
+    //console.log(statevar);
+    expect(nextState).to.equal(statevar);
   });
 
   it('handles SET_STATE with plain JS payload', () => {
@@ -33,7 +35,7 @@ describe('reducer', () => {
       state: {
         vote: {
           pair: ['Inception', 'Interstellar'],
-          tally: {Inception: 1}
+          tally: {'Inception': 1}
         }
       }
     };
@@ -42,7 +44,7 @@ describe('reducer', () => {
     expect(nextState).to.equal(fromJS({
       vote: {
         pair: ['Inception', 'Interstellar'],
-        tally: {Inception: 1}
+        tally: {'Inception': 1}
       }
     }));
   });
@@ -53,7 +55,7 @@ describe('reducer', () => {
       state: {
         vote: {
           pair: ['Inception', 'The Prestige'],
-          tally: {Inception: 1}
+          tally: {'Inception': 1}
         }
       }
     };
@@ -62,7 +64,7 @@ describe('reducer', () => {
     expect(nextState).to.equal(fromJS({
       vote: {
         pair: ['Inception', 'The Prestige'],
-        tally: {Inception: 1}
+        tally: {'Inception': 1}
       }
     }));
   });
