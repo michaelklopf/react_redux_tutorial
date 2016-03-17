@@ -25,7 +25,7 @@ describe('reducer', () => {
     });
     //console.log(nextState);
     //console.log(statevar);
-    expect(nextState).to.equal(statevar);
+    expect(nextState).to.eql(statevar);
   });
 
   it('handles SET_STATE with plain JS payload', () => {
@@ -41,7 +41,7 @@ describe('reducer', () => {
     };
     const nextState = reducer(initialState, action);
 
-    expect(nextState).to.equal(fromJS({
+    expect(nextState).to.eql(fromJS({
       vote: {
         pair: ['Inception', 'Interstellar'],
         tally: {'Inception': 1}
@@ -61,10 +61,28 @@ describe('reducer', () => {
     };
     const nextState = reducer(undefined, action);
 
-    expect(nextState).to.equal(fromJS({
+    expect(nextState).to.eql(fromJS({
       vote: {
         pair: ['Inception', 'The Prestige'],
         tally: {'Inception': 1}
+      }
+    }));
+  });
+
+  it('handles VOTE by setting hasVoted', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Inception', "The Prestige"],
+        tally: {Inception: 1}
+      }
+    });
+    const action = {type: 'VOTE', entry: 'Inception'};
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.eql(fromJS({
+      vote: {
+        pair: ['Inception', 'The Prestige'],
+        tally: {Inception: 1}
       }
     }));
   });
