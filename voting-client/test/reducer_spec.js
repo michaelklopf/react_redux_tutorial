@@ -72,7 +72,7 @@ describe('reducer', () => {
   it('handles VOTE by setting hasVoted', () => {
     const state = fromJS({
       vote: {
-        pair: ['Inception', "The Prestige"],
+        pair: ['Inception', 'The Prestige'],
         tally: {Inception: 1}
       }
     });
@@ -83,6 +83,50 @@ describe('reducer', () => {
       vote: {
         pair: ['Inception', 'The Prestige'],
         tally: {Inception: 1}
+      },
+      hasVoted: 'Inception'
+    }));
+  });
+
+  it('does not set hasVoted for VOTE on invalid entry', () => {
+    const state = fromJS({
+      vote: {
+        pair: ['Inception', 'The Dark Knight'],
+        tally: {Inception: 1}
+      }
+    });
+    const action = {type: 'VOTE', entry: 'Batman Begins'};
+    const nextState = reducer(state, action);
+
+    expect(nextState).to.eql(fromJS({
+      vote: {
+        pair: ['Inception', 'The Dark Knight'],
+        tally: {Inception: 1}
+      }
+    }));
+  });
+
+  it('removes hasVoted on SET_STATE if pair changes', () => {
+    const initialState = fromJS({
+      vote: {
+        pair: ['Inception', 'Interstellar'],
+        tally: {Inception: 1}
+      },
+      hasVoted: 'Inception'
+    });
+    const action = {
+      type: 'SET_STATE',
+      state: {
+        vote: {
+          pair: ['The Dark Knight', 'Batman Begins']
+        }
+      }
+    };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).to.eql(fromJS({
+      vote: {
+        pair: ['The Dark Knight', 'Batman Begins']
       }
     }));
   });
